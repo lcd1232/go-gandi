@@ -1,0 +1,10 @@
+with-expecter: true
+packages:
+  github.com/go-gandi/go-gandi/internal/client:
+    config:
+      outpkg: "mocks"
+      dir: "./internal/mocks"
+    interfaces:
+      doer:
+        config:
+          mockname: "MockDoer"

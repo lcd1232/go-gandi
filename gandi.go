@@ -1,3 +1,4 @@
+//go:generate mockery
 package gandi
 
 import (

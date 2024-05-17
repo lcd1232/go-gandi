@@ -29,3 +29,14 @@ repos:
         additional_dependencies:
           - prettier@2.2.0
           - prettier-plugin-toml@0.3.1
+
+  - repo: local
+    hooks:
+      - id: go-generate
+        name: go generate
+        entry: go generate ./...
+        language: golang
+        language_version: 1.21.10
+        pass_filenames: false
+        additional_dependencies:
+          - github.com/vektra/mockery/v2@v2.43.1

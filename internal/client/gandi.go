@@ -16,6 +16,12 @@ import (
 	"moul.io/http2curl"
 )
 
+// doer is an interface that wraps the Do method.
+// It is used to mock the http.Client in tests.
+type doer interface {
+	Do(*http.Request) (*http.Response, error)
+}
+
 // Gandi is the handle used to interact with the Gandi API
 type Gandi struct {
 	apikey    string
@@ -24,11 +30,20 @@ type Gandi struct {
 	sharingID string
 	debug     bool
 	dryRun    bool
-	timeout   time.Duration
+	doer      doer
 }
 
 // New instantiates a new Gandi client
-func New(apikey string, pat string, apiurl string, sharingID string, debug bool, dryRun bool, timeout time.Duration) *Gandi {
+func New(
+	apikey string,
+	pat string,
+	apiurl string,
+	sharingID string,
+	debug bool,
+	dryRun bool,
+	timeout time.Duration,
+	doer doer,
+) *Gandi {
 	if apiurl == "" {
 		apiurl = config.APIURL
 	}
@@ -36,7 +51,12 @@ func New(apikey string, pat string, apiurl string, sharingID string, debug bool,
 	if timeout == 0 {
 		timeout = config.Timeout
 	}
-	return &Gandi{apikey: apikey, pat: pat, endpoint: endpoint, sharingID: sharingID, debug: debug, dryRun: dryRun, timeout: timeout}
+	if doer == nil {
+		doer = &http.Client{
+			Timeout: timeout,
+		}
+	}
+	return &Gandi{apikey: apikey, pat: pat, endpoint: endpoint, sharingID: sharingID, debug: debug, dryRun: dryRun, doer: doer}
 }
 
 // SetEndpoint sets the URL to the endpoint. It takes a string defining the subpath under https://api.gandi.net/v5/
@@ -150,9 +170,6 @@ func (g *Gandi) doAskGandi(method, path string, p interface{}, extraHeaders [][2
 	if err != nil {
 		return nil, nil, fmt.Errorf("Fail to json.Marshal request params (error '%w')", err)
 	}
-	client := &http.Client{
-		Timeout: g.timeout,
-	}
 	suffix := ""
 	if len(g.sharingID) != 0 {
 		suffix += "?sharing_id=" + g.sharingID
@@ -181,7 +198,7 @@ func (g *Gandi) doAskGandi(method, path string, p interface{}, extraHeaders [][2
 		command, _ := http2curl.GetCurlCommand(req)
 		log.Println("Request: ", command)
 	}
-	resp, err := client.Do(req)
+	resp, err := g.doer.Do(req)
 	if err != nil {
 		return nil, nil, fmt.Errorf("Fail to do the request (error '%w')", err)
 	}

@@ -223,3 +223,46 @@ type LiveDNS struct {
 type Tags struct {
 	Tags []string `json:"tags"`
 }
+
+type DomainAvailability struct {
+	Currency string    `json:"currency"`
+	Grid     string    `json:"grid"`
+	Products []Product `json:"products"`
+}
+
+type Product struct {
+	Status  string   `json:"status"`
+	Periods []Period `json:"periods"`
+	Process string   `json:"process"`
+	Prices  []Price  `json:"prices"`
+	Taxes   []Tax    `json:"taxes"`
+}
+
+type Tax struct {
+	Name string  `json:"name"`
+	Rate float64 `json:"rate"`
+	Type string  `json:"type"`
+}
+
+type Price struct {
+	DurationUnit           string         `json:"duration_unit"`
+	MaxDuration            int            `json:"max_duration"`
+	MinDuration            int            `json:"min_duration"`
+	PriceAfterTaxes        float64        `json:"price_after_taxes"`
+	PriceBeforeTaxes       float64        `json:"price_before_taxes"`
+	Discount               bool           `json:"discount"`
+	NormalPriceAfterTaxes  float64        `json:"normal_price_after_taxes"`
+	NormalPriceBeforeTaxes float64        `json:"normal_price_before_taxes"`
+	Type                   string         `json:"type"`
+	Options                PricingOptions `json:"options"`
+}
+
+type PricingOptions struct {
+	Period *time.Time `json:"period"`
+}
+
+type Period struct {
+	Name     string     `json:"name"`
+	StartsAt time.Time  `json:"starts_at"`
+	EndsAt   *time.Time `json:"ends_at"`
+}
