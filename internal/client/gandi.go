@@ -7,6 +7,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"net/url"
 	"strings"
 	"time"
 
@@ -158,6 +159,21 @@ func (g *Gandi) GetBytes(path string, params interface{}) (http.Header, []byte, 
 	return g.doAskGandi(http.MethodGet, path, params, headers)
 }
 
+// addSharingID adds a sharing_id to the path if it is set
+func (g *Gandi) addSharingID(path string) (string, error) {
+	if g.sharingID == "" {
+		return path, nil
+	}
+	u, err := url.Parse(path)
+	if err != nil {
+		return "", fmt.Errorf("Fail to parse the path (error '%w')", err)
+	}
+	q := u.Query()
+	q.Set("sharing_id", g.sharingID)
+	u.RawQuery = q.Encode()
+	return u.String(), nil
+}
+
 // doAskGandi performs a call to the API. If the HTTP status code of
 // the response is not success, the returned error is a RequestError
 // (which contains the HTTP StatusCode).
@@ -170,14 +186,14 @@ func (g *Gandi) doAskGandi(method, path string, p interface{}, extraHeaders [][2
 	if err != nil {
 		return nil, nil, fmt.Errorf("Fail to json.Marshal request params (error '%w')", err)
 	}
-	suffix := ""
-	if len(g.sharingID) != 0 {
-		suffix += "?sharing_id=" + g.sharingID
+	path, err = g.addSharingID(path)
+	if err != nil {
+		return nil, nil, err
 	}
 	if params != nil && string(params) != "null" {
-		req, err = http.NewRequest(method, g.endpoint+path+suffix, bytes.NewReader(params))
+		req, err = http.NewRequest(method, g.endpoint+path, bytes.NewReader(params))
 	} else {
-		req, err = http.NewRequest(method, g.endpoint+path+suffix, nil)
+		req, err = http.NewRequest(method, g.endpoint+path, nil)
 	}
 	if err != nil {
 		return nil, nil, fmt.Errorf("Fail to create the request (error '%w')", err)
