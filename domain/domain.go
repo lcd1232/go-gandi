@@ -2,6 +2,8 @@ package domain
 
 import (
 	"encoding/json"
+	"fmt"
+	"net/url"
 
 	"github.com/go-gandi/go-gandi/config"
 	"github.com/go-gandi/go-gandi/internal/client"
@@ -45,8 +47,18 @@ func (g *Domain) GetDomain(domain string) (domainResponse Details, err error) {
 	return
 }
 
-func (g *Domain) GetDomainAvailability(req DomainAvailabilityRequest) (response []DomainAvailability, err error) {
-	panic("not implemented")
+func (g *Domain) GetDomainAvailability(req DomainAvailabilityRequest) (response DomainAvailability, err error) {
+	v := url.Values{
+		"name": {req.Domain},
+	}
+	if req.Country != "" {
+		v.Set("country", req.Country)
+	}
+	if req.Currency != "" {
+		v.Set("currency", req.Currency)
+	}
+	_, err = g.client.Get(fmt.Sprintf("check?%s", v.Encode()), v, &response)
+	return
 }
 
 // CreateDomain creates a single Domain

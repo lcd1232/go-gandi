@@ -26,7 +26,7 @@ func TestDomainCheck(t *testing.T) {
 	mockDoer := mocks.NewMockDoer(t)
 	mockDoer.EXPECT().Do(mock.Anything).RunAndReturn(func(r *http.Request) (*http.Response, error) {
 		assert.Equal(t, http.MethodGet, r.Method)
-		assert.Equal(t, "https://api.gandi.net/v5/domain/check?name=example.com&country=US&", r.URL.String())
+		assert.Equal(t, "https://api.gandi.net/v5/domain/check?country=US&currency=USD&name=example.com", r.URL.String())
 		return &http.Response{
 			Status:     http.StatusText(http.StatusOK),
 			StatusCode: http.StatusOK,
@@ -92,7 +92,11 @@ func TestDomainCheck(t *testing.T) {
 			},
 		},
 	}
-	got, err := d.GetDomainAvailability(DomainAvailabilityRequest{})
+	got, err := d.GetDomainAvailability(DomainAvailabilityRequest{
+		Domain:   "example.com",
+		Country:  "US",
+		Currency: "USD",
+	})
 	require.NoError(t, err)
 	assert.Equal(t, want, got)
 }
