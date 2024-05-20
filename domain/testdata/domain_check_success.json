@@ -1,0 +1,56 @@
+{
+  "currency": "EUR",
+  "grid": "A",
+  "products": [
+    {
+      "status": "available",
+      "periods": [
+        {
+          "name": "eap5",
+          "starts_at": "2019-02-25T16:00:00Z",
+          "ends_at": "2020-03-28T15:59:59Z"
+        },
+        {
+          "name": "golive",
+          "starts_at": "2020-03-28T16:00:00Z"
+        }
+      ],
+      "name": "example.com",
+      "process": "create",
+      "taxes": [
+        {
+          "type": "service",
+          "rate": 20,
+          "name": "vat"
+        }
+      ],
+      "prices": [
+        {
+          "max_duration": 1,
+          "duration_unit": "y",
+          "min_duration": 1,
+          "discount": false,
+          "price_after_taxes": 878.44,
+          "price_before_taxes": 732.03,
+          "type": "premium"
+        },
+        {
+          "max_duration": 1,
+          "duration_unit": "y",
+          "min_duration": 1,
+          "discount": false,
+          "price_after_taxes": 775.12,
+          "price_before_taxes": 645.93,
+          "type": "premium"
+        }
+      ]
+    }
+  ],
+  "taxes": [
+    {
+      "type": "service",
+      "rate": 20,
+      "name": "vat"
+    }
+  ]
+}

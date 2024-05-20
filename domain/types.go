@@ -224,15 +224,23 @@ type Tags struct {
 	Tags []string `json:"tags"`
 }
 
+type DomainAvailabilityRequest struct {
+	Domain   string
+	Country  string
+	Currency string
+}
+
 type DomainAvailability struct {
 	Currency string    `json:"currency"`
 	Grid     string    `json:"grid"`
 	Products []Product `json:"products"`
+	Taxes    []Tax     `json:"taxes"`
 }
 
 type Product struct {
 	Status  string   `json:"status"`
 	Periods []Period `json:"periods"`
+	Name    string   `json:"name"`
 	Process string   `json:"process"`
 	Prices  []Price  `json:"prices"`
 	Taxes   []Tax    `json:"taxes"`

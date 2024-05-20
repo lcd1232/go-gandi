@@ -45,6 +45,10 @@ func (g *Domain) GetDomain(domain string) (domainResponse Details, err error) {
 	return
 }
 
+func (g *Domain) GetDomainAvailability(req DomainAvailabilityRequest) (response []DomainAvailability, err error) {
+	panic("not implemented")
+}
+
 // CreateDomain creates a single Domain
 func (g *Domain) CreateDomain(req CreateRequest) (err error) {
 	_, err = g.client.Post("domains", req, nil)
