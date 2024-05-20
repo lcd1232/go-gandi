@@ -224,12 +224,14 @@ type Tags struct {
 	Tags []string `json:"tags"`
 }
 
+// DomainAvailabilityRequest is the request object for checking domain availability.
 type DomainAvailabilityRequest struct {
 	Domain   string
 	Country  string
 	Currency string
 }
 
+// DomainAvailability is the response object for checking domain availability.
 type DomainAvailability struct {
 	Currency string    `json:"currency"`
 	Grid     string    `json:"grid"`
@@ -237,6 +239,7 @@ type DomainAvailability struct {
 	Taxes    []Tax     `json:"taxes"`
 }
 
+// Product represents a domain product.
 type Product struct {
 	Status  string   `json:"status"`
 	Periods []Period `json:"periods"`
@@ -246,13 +249,17 @@ type Product struct {
 	Taxes   []Tax    `json:"taxes"`
 }
 
+// Tax represents a tax.
 type Tax struct {
 	Name string  `json:"name"`
 	Rate float64 `json:"rate"`
 	Type string  `json:"type"`
 }
 
+// Price represents a price.
 type Price struct {
+	// DurationUnit is the unit of the duration.
+	// Possible values: "y" (year)
 	DurationUnit           string         `json:"duration_unit"`
 	MaxDuration            int            `json:"max_duration"`
 	MinDuration            int            `json:"min_duration"`
@@ -265,10 +272,12 @@ type Price struct {
 	Options                PricingOptions `json:"options"`
 }
 
+// PricingOptions represents the pricing options.
 type PricingOptions struct {
 	Period *time.Time `json:"period"`
 }
 
+// Period represents a period.
 type Period struct {
 	Name     string     `json:"name"`
 	StartsAt time.Time  `json:"starts_at"`
