@@ -3,7 +3,7 @@ package certificate
 import (
 	"time"
 
-	"github.com/go-gandi/go-gandi/internal/client"
+	"github.com/lcd1232/go-gandi/internal/client"
 )
 
 type Certificate struct {

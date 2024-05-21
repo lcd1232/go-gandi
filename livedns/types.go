@@ -3,7 +3,7 @@ package livedns
 import (
 	"time"
 
-	"github.com/go-gandi/go-gandi/internal/client"
+	"github.com/lcd1232/go-gandi/internal/client"
 )
 
 // LiveDNS is the API client to the Gandi v5 LiveDNS API

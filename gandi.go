@@ -2,12 +2,12 @@
 package gandi
 
 import (
-	"github.com/go-gandi/go-gandi/certificate"
-	"github.com/go-gandi/go-gandi/config"
-	"github.com/go-gandi/go-gandi/domain"
-	"github.com/go-gandi/go-gandi/email"
-	"github.com/go-gandi/go-gandi/livedns"
-	"github.com/go-gandi/go-gandi/simplehosting"
+	"github.com/lcd1232/go-gandi/certificate"
+	"github.com/lcd1232/go-gandi/config"
+	"github.com/lcd1232/go-gandi/domain"
+	"github.com/lcd1232/go-gandi/email"
+	"github.com/lcd1232/go-gandi/livedns"
+	"github.com/lcd1232/go-gandi/simplehosting"
 )
 
 // NewDomainClient returns a client to the Gandi Domains API

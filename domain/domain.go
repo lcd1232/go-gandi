@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/go-gandi/go-gandi/config"
-	"github.com/go-gandi/go-gandi/internal/client"
+	"github.com/lcd1232/go-gandi/config"
+	"github.com/lcd1232/go-gandi/internal/client"
 )
 
 // New returns an instance of the Domain API client

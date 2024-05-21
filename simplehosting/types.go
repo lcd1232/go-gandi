@@ -1,7 +1,7 @@
 package simplehosting
 
 import (
-	"github.com/go-gandi/go-gandi/internal/client"
+	"github.com/lcd1232/go-gandi/internal/client"
 )
 
 // SimpleHosting is the API client to the Gandi v5 Simple Hosting API

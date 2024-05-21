@@ -3,7 +3,7 @@ package livedns
 import (
 	"encoding/json"
 
-	"github.com/go-gandi/go-gandi/types"
+	"github.com/lcd1232/go-gandi/types"
 )
 
 // GetDomainRecords lists all records in the zone associated with a domain

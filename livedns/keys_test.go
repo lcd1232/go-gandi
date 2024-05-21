@@ -3,8 +3,8 @@ package livedns_test
 import (
 	"testing"
 
-	"github.com/go-gandi/go-gandi/config"
-	"github.com/go-gandi/go-gandi/livedns"
+	"github.com/lcd1232/go-gandi/config"
+	"github.com/lcd1232/go-gandi/livedns"
 	"gopkg.in/h2non/gock.v1"
 )
 

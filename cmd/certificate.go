@@ -1,6 +1,6 @@
 package main
 
-import "github.com/go-gandi/go-gandi/certificate"
+import "github.com/lcd1232/go-gandi/certificate"
 
 type certificateCmd struct {
 	List        certificateListCmd        `kong:"cmd,help='List certificates'"`

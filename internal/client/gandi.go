@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/go-gandi/go-gandi/config"
-	"github.com/go-gandi/go-gandi/types"
+	"github.com/lcd1232/go-gandi/config"
+	"github.com/lcd1232/go-gandi/types"
 	"github.com/peterhellberg/link"
 	"moul.io/http2curl"
 )

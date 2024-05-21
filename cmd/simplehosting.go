@@ -1,6 +1,6 @@
 package main
 
-import "github.com/go-gandi/go-gandi/simplehosting"
+import "github.com/lcd1232/go-gandi/simplehosting"
 
 type simpleHostingCmd struct {
 	Instance instanceCmd `kong:"cmd,help='Simple Hosting instance commands'"`

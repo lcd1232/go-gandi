@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/go-gandi/go-gandi/types"
+	"github.com/lcd1232/go-gandi/types"
 	"gopkg.in/h2non/gock.v1"
 )
 

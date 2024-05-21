@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/go-gandi/go-gandi/types"
+	"github.com/lcd1232/go-gandi/types"
 )
 
 // GetTSIGKeys retrieves all the TSIG keys for the account

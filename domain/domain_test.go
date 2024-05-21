@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/go-gandi/go-gandi/internal/client"
-	"github.com/go-gandi/go-gandi/internal/mocks"
+	"github.com/lcd1232/go-gandi/internal/client"
+	"github.com/lcd1232/go-gandi/internal/mocks"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"

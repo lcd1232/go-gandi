@@ -1,4 +1,4 @@
-module github.com/go-gandi/go-gandi
+module github.com/lcd1232/go-gandi
 
 go 1.17
 
