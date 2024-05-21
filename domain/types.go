@@ -18,7 +18,7 @@ type Contact struct {
 	FamilyName      string                 `json:"family"`
 	GivenName       string                 `json:"given"`
 	StreetAddr      string                 `json:"streetaddr"`
-	ContactType     int                    `json:"type"`
+	ContactType     string                 `json:"type"`
 	BrandNumber     string                 `json:"brand_number,omitempty"`
 	City            string                 `json:"city,omitempty"`
 	DataObfuscated  *bool                  `json:"data_obfuscated,omitempty"`
