@@ -32,7 +32,10 @@
           "discount": false,
           "price_after_taxes": 878.44,
           "price_before_taxes": 732.03,
-          "type": "premium"
+          "type": "premium",
+          "options": {
+            "period": "golive"
+          }
         },
         {
           "max_duration": 1,

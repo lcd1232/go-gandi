@@ -150,6 +150,9 @@ func TestDomainCheckWithSharingID(t *testing.T) {
 						PriceAfterTaxes:  878.44,
 						PriceBeforeTaxes: 732.03,
 						Type:             "premium",
+						Options: PricingOptions{
+							Period: "golive",
+						},
 					},
 					{
 						MaxDuration:      1,

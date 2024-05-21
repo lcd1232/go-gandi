@@ -274,7 +274,7 @@ type Price struct {
 
 // PricingOptions represents the pricing options.
 type PricingOptions struct {
-	Period *time.Time `json:"period"`
+	Period string `json:"period"`
 }
 
 // Period represents a period.
