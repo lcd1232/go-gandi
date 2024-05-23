@@ -1,0 +1,144 @@
+{
+  "fqdn": "example.com",
+  "tld": "com",
+  "status": [
+    "clientTransferProhibited"
+  ],
+  "dates": {
+    "created_at": "2018-10-07T12:01:12Z",
+    "deletes_at": "2026-05-30T12:30:47Z",
+    "hold_begins_at": "2026-04-15T22:30:47Z",
+    "hold_ends_at": "2026-05-30T22:30:47Z",
+    "pending_delete_ends_at": "2026-07-14T12:30:47Z",
+    "registry_created_at": "2018-04-15T22:30:47Z",
+    "registry_ends_at": "2026-04-15T22:30:47Z",
+    "renew_begins_at": "2012-01-01T00:00:00Z",
+    "restore_ends_at": "2026-06-29T12:30:47Z",
+    "updated_at": "2024-05-22T12:32:11Z",
+    "authinfo_expires_at": "2026-05-22T12:32:11Z"
+  },
+  "can_tld_lock": true,
+  "authinfo": "zjzxhgjrsdf!asd",
+  "nameservers": [
+    "ns-1.gandi.net",
+    "ns-2.gandi.net",
+    "ns-3.gandi.net"
+  ],
+  "tags": [],
+  "services": [
+    "gandilivedns"
+  ],
+  "autorenew": {
+    "duration": 1,
+    "dates": [
+      "2026-03-15T21:30:47Z",
+      "2026-03-31T22:30:47Z",
+      "2026-04-14T22:30:47Z"
+    ],
+    "href": "https://api.gandi.net/v5/domain/domains/example.com/autorenew",
+    "enabled": false
+  },
+  "contacts": {
+    "owner": {
+      "orgname": "Company Inc",
+      "family": "Doe",
+      "given": "John",
+      "type": 1,
+      "streetaddr": "123 Main St",
+      "zip": "90001",
+      "city": "Los Angeles",
+      "state": "US-CA",
+      "country": "US",
+      "email": "support@example.com",
+      "mail_obfuscated": true,
+      "phone": "+1.2135551212",
+      "data_obfuscated": true,
+      "extra_parameters": {
+        "birth_date": "",
+        "birth_department": "",
+        "birth_city": "",
+        "birth_country": ""
+      },
+      "reachability": "done",
+      "validation": "none"
+    },
+    "admin": {
+      "family": "Doe",
+      "given": "John",
+      "type": 0,
+      "streetaddr": "123 Main St",
+      "zip": "90001",
+      "city": "Los Angeles",
+      "state": "US-CA",
+      "country": "US",
+      "email": "support@example.com",
+      "mail_obfuscated": true,
+      "phone": "+1.2135551212",
+      "data_obfuscated": true,
+      "extra_parameters": {
+        "birth_date": "",
+        "birth_department": "",
+        "birth_city": "",
+        "birth_country": ""
+      },
+      "reachability": "done",
+      "validation": "none",
+      "same_as_owner": false
+    },
+    "tech": {
+      "family": "Doe",
+      "given": "John",
+      "type": 0,
+      "streetaddr": "123 Main St",
+      "zip": "90001",
+      "city": "Los Angeles",
+      "country": "US",
+      "email": "support@example.com",
+      "mail_obfuscated": true,
+      "phone": "+1.2135551212",
+      "data_obfuscated": true,
+      "extra_parameters": {
+        "birth_date": "",
+        "birth_department": "",
+        "birth_city": "",
+        "birth_country": ""
+      },
+      "reachability": "done",
+      "validation": "none",
+      "same_as_owner": false
+    },
+    "bill": {
+      "family": "Doe",
+      "given": "John",
+      "type": 0,
+      "streetaddr": "123 Main St",
+      "zip": "90001",
+      "city": "Los Angeles",
+      "country": "US",
+      "state": "US-CA",
+      "email": "support@example.com",
+      "mail_obfuscated": true,
+      "phone": "+1.2135551212",
+      "data_obfuscated": true,
+      "extra_parameters": {
+        "birth_date": "",
+        "birth_department": "",
+        "birth_city": "",
+        "birth_country": ""
+      },
+      "reachability": "done",
+      "validation": "none",
+      "same_as_owner": false
+    }
+  },
+  "id": "f0996c41-12d1-458b-964f-04b045b45e2d",
+  "sharing_space": {
+    "id": "d828bdcb-934a-4d1b-ae1d-d663b948e51a",
+    "name": "Company",
+    "type": "organization",
+    "reseller": false
+  },
+  "href": "https://api.gandi.net/v5/domain/domains/example.com",
+  "reachability": "done",
+  "fqdn_unicode": "example.com"
+}

@@ -22,6 +22,14 @@ func readFile(t *testing.T, path string) []byte {
 	return b
 }
 
+func toPointerTime(t time.Time) *time.Time {
+	return &t
+}
+
+func toBool(b bool) *bool {
+	return &b
+}
+
 func TestDomainCheck(t *testing.T) {
 	mockDoer := mocks.NewMockDoer(t)
 	mockDoer.EXPECT().Do(mock.Anything).RunAndReturn(func(r *http.Request) (*http.Response, error) {
@@ -176,6 +184,124 @@ func TestDomainCheckWithSharingID(t *testing.T) {
 		Country:  "US",
 		Currency: "USD",
 	})
+	require.NoError(t, err)
+	assert.Equal(t, want, got)
+}
+
+func TestDomainGetDomain(t *testing.T) {
+	mockDoer := mocks.NewMockDoer(t)
+	mockDoer.EXPECT().Do(mock.Anything).RunAndReturn(func(r *http.Request) (*http.Response, error) {
+		assert.Equal(t, http.MethodGet, r.Method)
+		assert.Equal(t, "https://api.gandi.net/v5/domain/domains/example.com", r.URL.String())
+		return &http.Response{
+			Status:     http.StatusText(http.StatusOK),
+			StatusCode: http.StatusOK,
+			Body:       io.NopCloser(bytes.NewReader(readFile(t, "domain_details_success.json"))),
+		}, nil
+	})
+	c := client.New("apikey123", "", "", "", false, false, 0, mockDoer)
+	d := NewFromClient(*c)
+	want := Details{
+		AutoRenew: &AutoRenew{
+			Duration: 1,
+			Dates: []*time.Time{
+				toPointerTime(time.Date(2026, 3, 15, 21, 30, 47, 0, time.UTC)),
+				toPointerTime(time.Date(2026, 3, 31, 22, 30, 47, 0, time.UTC)),
+				toPointerTime(time.Date(2026, 4, 14, 22, 30, 47, 0, time.UTC)),
+			},
+			Href: "https://api.gandi.net/v5/domain/example.com/auto-renew",
+		},
+		CanTLDLock: toBool(true),
+		Contacts: &Contacts{
+			Owner: &Contact{
+				OrgName:        "Company Inc",
+				FamilyName:     "Doe",
+				GivenName:      "John",
+				ContactType:    "company",
+				StreetAddr:     "123 Main St",
+				Zip:            "90001",
+				City:           "Los Angeles",
+				State:          "US-CA",
+				Country:        "US",
+				Email:          "support@example.com",
+				MailObfuscated: toBool(true),
+				Phone:          "+1.2135551212",
+				DataObfuscated: toBool(true),
+				Validation:     "none",
+			},
+			Admin: &Contact{
+				FamilyName:     "Doe",
+				GivenName:      "John",
+				ContactType:    "person",
+				StreetAddr:     "123 Main St",
+				Zip:            "90001",
+				City:           "Los Angeles",
+				State:          "US-CA",
+				Country:        "US",
+				Email:          "support@example.com",
+				MailObfuscated: toBool(true),
+				Phone:          "+1.2135551212",
+				DataObfuscated: toBool(true),
+				Validation:     "none",
+			},
+			Tech: &Contact{
+				FamilyName:     "Doe",
+				GivenName:      "John",
+				ContactType:    "person",
+				StreetAddr:     "123 Main St",
+				Zip:            "90001",
+				City:           "Los Angeles",
+				State:          "US-CA",
+				Country:        "US",
+				Email:          "support@example.com",
+				MailObfuscated: toBool(true),
+				Phone:          "+1.2135551212",
+				DataObfuscated: toBool(true),
+				Validation:     "none",
+			},
+			Billing: &Contact{
+				FamilyName:     "Doe",
+				GivenName:      "John",
+				ContactType:    "person",
+				StreetAddr:     "123 Main St",
+				Zip:            "90001",
+				City:           "Los Angeles",
+				State:          "US-CA",
+				Country:        "US",
+				Email:          "support@example.com",
+				MailObfuscated: toBool(true),
+				Phone:          "+1.2135551212",
+				DataObfuscated: toBool(true),
+				Validation:     "none",
+			},
+		},
+		Dates: &ResponseDates{
+			CreatedAt:           toPointerTime(time.Date(2018, 10, 7, 12, 1, 12, 0, time.UTC)),
+			DeletesAt:           toPointerTime(time.Date(2026, 5, 30, 12, 30, 47, 0, time.UTC)),
+			HoldBeginsAt:        toPointerTime(time.Date(2026, 4, 15, 22, 30, 47, 0, time.UTC)),
+			HoldEndsAt:          toPointerTime(time.Date(2026, 5, 30, 22, 30, 47, 0, time.UTC)),
+			PendingDeleteEndsAt: toPointerTime(time.Date(2026, 7, 14, 12, 30, 47, 0, time.UTC)),
+			RegistryCreatedAt:   toPointerTime(time.Date(2018, 4, 15, 22, 30, 47, 0, time.UTC)),
+			RegistryEndsAt:      toPointerTime(time.Date(2026, 4, 15, 22, 30, 47, 0, time.UTC)),
+			RenewBeginsAt:       toPointerTime(time.Date(2012, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:           toPointerTime(time.Date(2024, 5, 22, 12, 32, 11, 0, time.UTC)),
+			AuthInfoExpiresAt:   toPointerTime(time.Date(2026, 5, 22, 12, 32, 11, 0, time.UTC)),
+		},
+		FQDN:        "example.com",
+		FQDNUnicode: "example.com",
+		Href:        "https://api.gandi.net/v5/domain/domains/example.com",
+		Nameservers: []string{"ns1.gandi.net", "ns2.gandi.net", "ns3.gandi.net"},
+		Services:    []string{"gandilivedns"},
+		SharingSpace: &SharingSpace{
+			ID:   "d828bdcb-934a-4d1b-ae1d-d663b948e51a",
+			Name: "Company",
+		},
+		Status:   []string{"clientTransferProhibited"},
+		TLD:      "com",
+		AuthInfo: "zjzxhgjrsdf!asd",
+		ID:       "f0996c41-12d1-458b-964f-04b045b45e2d",
+	}
+	got, err := d.GetDomain("example.com")
 	require.NoError(t, err)
 	assert.Equal(t, want, got)
 }
