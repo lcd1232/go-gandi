@@ -1,6 +1,7 @@
 package domain
 
 import (
+	"encoding/json"
 	"time"
 
 	"github.com/lcd1232/go-gandi/internal/client"
@@ -98,9 +99,29 @@ type TrusteeRole struct {
 
 // Details describes a single domain
 type Details struct {
+	AutoRenew    *AutoRenew
+	CanTLDLock   *bool
+	Contacts     *Contacts
+	Dates        *ResponseDates
+	FQDN         string
+	FQDNUnicode  string
+	Href         string
+	Nameservers  []string
+	Services     []string
+	SharingSpace *SharingSpace
+	Status       []string
+	TLD          string
+	AuthInfo     string
+	ID           string
+	SharingID    string
+	Tags         []string
+	TrusteeRoles []TrusteeRole
+}
+
+type details struct {
 	AutoRenew    *AutoRenew     `json:"autorenew"`
 	CanTLDLock   *bool          `json:"can_tld_lock"`
-	Contacts     *Contacts      `json:"contacts"`
+	Contacts     *contacts      `json:"contacts"`
 	Dates        *ResponseDates `json:"dates"`
 	FQDN         string         `json:"fqdn"`
 	FQDNUnicode  string         `json:"fqdn_unicode"`
@@ -115,6 +136,40 @@ type Details struct {
 	SharingID    string         `json:"sharing_id,omitempty"`
 	Tags         []string       `json:"tags,omitempty"`
 	TrusteeRoles []TrusteeRole  `json:"trustee_roles,omitempty"`
+}
+
+type contacts struct {
+	Admin   *contact `json:"admin,omitempty"`
+	Billing *contact `json:"bill,omitempty"`
+	Owner   *contact `json:"owner,omitempty"`
+	Tech    *contact `json:"tech,omitempty"`
+}
+
+type contact struct {
+	Country         string                 `json:"country"`
+	Email           string                 `json:"email"`
+	FamilyName      string                 `json:"family"`
+	GivenName       string                 `json:"given"`
+	StreetAddr      string                 `json:"streetaddr"`
+	ContactType     json.Number            `json:"type"`
+	BrandNumber     string                 `json:"brand_number,omitempty"`
+	City            string                 `json:"city,omitempty"`
+	DataObfuscated  *bool                  `json:"data_obfuscated,omitempty"`
+	Fax             string                 `json:"fax,omitempty"`
+	Language        string                 `json:"lang,omitempty"`
+	MailObfuscated  *bool                  `json:"mail_obfuscated,omitempty"`
+	Mobile          string                 `json:"mobile,omitempty"`
+	OrgName         string                 `json:"orgname,omitempty"`
+	Phone           string                 `json:"phone,omitempty"`
+	Siren           string                 `json:"siren,omitempty"`
+	State           string                 `json:"state,omitempty"`
+	Validation      string                 `json:"validation,omitempty"`
+	Zip             string                 `json:"zip,omitempty"`
+	ExtraParameters map[string]interface{} `json:"extra_parameters,omitempty"`
+}
+
+func (c *contact) GetContactType() string {
+	panic("implement me")
 }
 
 // CreateRequest is used to request a new domain

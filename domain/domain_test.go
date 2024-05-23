@@ -2,6 +2,7 @@ package domain
 
 import (
 	"bytes"
+	"encoding/json"
 	"io"
 	"net/http"
 	"os"
@@ -304,4 +305,60 @@ func TestDomainGetDomain(t *testing.T) {
 	got, err := d.GetDomain("example.com")
 	require.NoError(t, err)
 	assert.Equal(t, want, got)
+}
+
+func TestGetContactType(t *testing.T) {
+	for _, tc := range []struct {
+		name  string
+		value string
+		want  string
+	}{
+		{
+			name:  "individual as a string",
+			value: "company",
+			want:  "individual",
+		},
+		{
+			name:  "individual as a number",
+			value: "0",
+			want:  "individual",
+		},
+		{
+			name:  "company as a string",
+			value: "company",
+			want:  "company",
+		},
+		{
+			name:  "company as a number",
+			value: "1",
+			want:  "company",
+		},
+		{
+			name:  "association as a string",
+			value: "association",
+			want:  "association",
+		},
+		{
+			name:  "association as a number",
+			value: "2",
+			want:  "association",
+		},
+		{
+			name:  "public body as a string",
+			value: "publicbody",
+			want:  "publicbody",
+		},
+		{
+			name:  "public body as a number",
+			value: "3",
+			want:  "publicbody",
+		},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			c := contact{
+				ContactType: json.Number(tc.value),
+			}
+			assert.Equal(t, tc.want, c.GetContactType())
+		})
+	}
 }
