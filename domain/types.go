@@ -138,6 +138,15 @@ type details struct {
 	TrusteeRoles []TrusteeRole  `json:"trustee_roles,omitempty"`
 }
 
+func (d *details) getContacts() *Contacts {
+	return &Contacts{
+		Admin:   d.Contacts.Admin.getContact(),
+		Billing: d.Contacts.Billing.getContact(),
+		Owner:   d.Contacts.Owner.getContact(),
+		Tech:    d.Contacts.Tech.getContact(),
+	}
+}
+
 type contacts struct {
 	Admin   *contact `json:"admin,omitempty"`
 	Billing *contact `json:"bill,omitempty"`
@@ -168,6 +177,34 @@ type contact struct {
 	ExtraParameters map[string]interface{} `json:"extra_parameters,omitempty"`
 }
 
+func (c *contact) getContact() *Contact {
+	if c == nil {
+		return nil
+	}
+	return &Contact{
+		Country:         c.Country,
+		Email:           c.Email,
+		FamilyName:      c.FamilyName,
+		GivenName:       c.GivenName,
+		StreetAddr:      c.StreetAddr,
+		ContactType:     c.getContactType(),
+		BrandNumber:     c.BrandNumber,
+		City:            c.City,
+		DataObfuscated:  c.DataObfuscated,
+		Fax:             c.Fax,
+		Language:        c.Language,
+		MailObfuscated:  c.MailObfuscated,
+		Mobile:          c.Mobile,
+		OrgName:         c.OrgName,
+		Phone:           c.Phone,
+		Siren:           c.Siren,
+		State:           c.State,
+		Validation:      c.Validation,
+		Zip:             c.Zip,
+		ExtraParameters: c.ExtraParameters,
+	}
+}
+
 var contactTypeMap = map[int]string{
 	0: "individual",
 	1: "company",
@@ -175,7 +212,7 @@ var contactTypeMap = map[int]string{
 	3: "publicbody",
 }
 
-func (c *contact) GetContactType() string {
+func (c *contact) getContactType() string {
 	v, err := c.ContactType.Int64()
 	if err != nil {
 		return c.ContactType.String()

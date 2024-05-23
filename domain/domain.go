@@ -43,8 +43,27 @@ func (g *Domain) ListDomains() (domains []ListResponse, err error) {
 // GetDomain requests a single Domain
 // It returns a Details object and any error encountered
 func (g *Domain) GetDomain(domain string) (domainResponse Details, err error) {
-	_, err = g.client.Get("domains/"+domain, nil, &domainResponse)
-	return
+	var resp details
+	_, err = g.client.Get("domains/"+domain, nil, &resp)
+	return Details{
+		AutoRenew:    resp.AutoRenew,
+		CanTLDLock:   resp.CanTLDLock,
+		Contacts:     resp.getContacts(),
+		Dates:        resp.Dates,
+		FQDN:         resp.FQDN,
+		FQDNUnicode:  resp.FQDNUnicode,
+		Href:         resp.Href,
+		Nameservers:  resp.Nameservers,
+		Services:     resp.Services,
+		SharingSpace: resp.SharingSpace,
+		Status:       resp.Status,
+		TLD:          resp.TLD,
+		AuthInfo:     resp.AuthInfo,
+		ID:           resp.ID,
+		SharingID:    resp.SharingID,
+		Tags:         resp.Tags,
+		TrusteeRoles: resp.TrusteeRoles,
+	}, nil
 }
 
 func (g *Domain) GetDomainAvailability(req DomainAvailabilityRequest) (response DomainAvailability, err error) {
