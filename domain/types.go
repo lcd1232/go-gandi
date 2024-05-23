@@ -168,8 +168,19 @@ type contact struct {
 	ExtraParameters map[string]interface{} `json:"extra_parameters,omitempty"`
 }
 
+var contactTypeMap = map[int]string{
+	0: "individual",
+	1: "company",
+	2: "association",
+	3: "publicbody",
+}
+
 func (c *contact) GetContactType() string {
-	panic("implement me")
+	v, err := c.ContactType.Int64()
+	if err != nil {
+		return c.ContactType.String()
+	}
+	return contactTypeMap[int(v)]
 }
 
 // CreateRequest is used to request a new domain

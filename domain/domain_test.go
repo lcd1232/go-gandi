@@ -315,7 +315,7 @@ func TestGetContactType(t *testing.T) {
 	}{
 		{
 			name:  "individual as a string",
-			value: "company",
+			value: "individual",
 			want:  "individual",
 		},
 		{
